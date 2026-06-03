@@ -75,27 +75,53 @@ if (floatBtn) {
 /* ── Contact Form ── */
 const form = document.getElementById('contact-form');
 if (form) {
-  form.addEventListener('submit', e => {
+  form.addEventListener('submit', async e => {
     e.preventDefault();
     const btn = form.querySelector('button[type="submit"]');
-    const orig = btn.innerHTML;
-
+    const originalHTML = btn.innerHTML;
+    btn.disabled = true;
+    
     btn.innerHTML = `
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
-        <polyline points="20 6 9 17 4 12"/>
+        <circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/>
       </svg>
-      Message Sent. We'll be in touch shortly
+      Sending…
     `;
-    btn.style.background = 'linear-gradient(135deg, #18B26A, #22D37A)';
-    btn.disabled = true;
 
-    setTimeout(() => {
-      btn.innerHTML = orig;
-      btn.style.background = '';
+    try {
+      const formData = new FormData(form);
+      await fetch(form.action, {
+        method: form.method,
+        body: formData,
+        mode: 'no-cors'
+      });
+      
+      // If fetch completes without error, show success message
+      showSuccessMessage();
+      
+    } catch (error) {
+      console.error('Form submission error:', error);
       btn.disabled = false;
-      form.reset();
-    }, 5000);
+      btn.innerHTML = originalHTML;
+      alert('There was an error sending your message. Please try again or contact us at info@veridionsystems.net');
+    }
   });
+}
+
+// Display success message
+function showSuccessMessage() {
+  const form = document.getElementById('contact-form');
+  if (!form) return;
+
+  const parent = form.parentElement;
+  const successMsg = document.createElement('div');
+  successMsg.className = 'contact-success';
+  successMsg.innerHTML = `
+    <div class="success-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
+    <h3>Thank you</h3>
+    <p>Your message has been received. We will respond within one business day.</p>
+  `;
+  parent.replaceChild(successMsg, form);
 }
 
 /* ── Portfolio: hide broken img so placeholder shows ── */
