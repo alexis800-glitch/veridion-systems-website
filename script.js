@@ -75,12 +75,14 @@ if (floatBtn) {
 /* ── Contact Form ── */
 const form = document.getElementById('contact-form');
 if (form) {
+  const submitBtn = form.querySelector('button[type="submit"]');
+  const originalBtnHTML = submitBtn ? submitBtn.innerHTML : '';
+
   form.addEventListener('submit', async e => {
     e.preventDefault();
     const btn = form.querySelector('button[type="submit"]');
-    const originalHTML = btn.innerHTML;
     btn.disabled = true;
-    
+
     btn.innerHTML = `
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
         <circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/>
@@ -95,33 +97,36 @@ if (form) {
         body: formData,
         mode: 'no-cors'
       });
-      
-      // If fetch completes without error, show success message
-      showSuccessMessage();
-      
+
+      showSuccessMessage(originalBtnHTML);
+
     } catch (error) {
       console.error('Form submission error:', error);
       btn.disabled = false;
-      btn.innerHTML = originalHTML;
+      btn.innerHTML = originalBtnHTML;
       alert('There was an error sending your message. Please try again or contact us at info@veridionsystems.net');
     }
   });
 }
 
-// Display success message
-function showSuccessMessage() {
-  const form = document.getElementById('contact-form');
-  if (!form) return;
+function showSuccessMessage(originalBtnHTML) {
+  const contactForm = document.getElementById('contact-form');
+  const successEl = document.getElementById('contact-success');
+  if (!contactForm || !successEl) return;
 
-  const parent = form.parentElement;
-  const successMsg = document.createElement('div');
-  successMsg.className = 'contact-success';
-  successMsg.innerHTML = `
-    <div class="success-icon"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg></div>
-    <h3>Thank you</h3>
-    <p>Your message has been received. We will respond within one business day.</p>
-  `;
-  parent.replaceChild(successMsg, form);
+  contactForm.style.display = 'none';
+  successEl.style.display = 'flex';
+
+  setTimeout(() => {
+    successEl.style.display = 'none';
+    contactForm.style.display = 'flex';
+    contactForm.reset();
+    const btn = contactForm.querySelector('button[type="submit"]');
+    if (btn) {
+      btn.disabled = false;
+      btn.innerHTML = originalBtnHTML;
+    }
+  }, 4000);
 }
 
 /* ── Portfolio: hide broken img so placeholder shows ── */
