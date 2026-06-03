@@ -1,0 +1,17 @@
+<svg width="260" height="48" viewBox="0 0 260 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!--
+    Veridion Systems Ltd — Main Logo (horizontal, dark version)
+    Icon + Wordmark. Use on dark backgrounds.
+  -->
+
+  <!-- Icon badge -->
+  <rect width="48" height="48" rx="10" fill="#071923"/>
+  <path d="M 6 13 H 15 L 24 35" stroke="#2BB9C8" stroke-width="5" stroke-linecap="square" stroke-linejoin="bevel" fill="none"/>
+  <path d="M 24 35 L 33 13 H 42" stroke="#2BB9C8" stroke-width="5" stroke-linecap="square" stroke-linejoin="bevel" fill="none"/>
+  <rect x="21.5" y="32.5" width="5" height="5" fill="#D6A93B"/>
+
+  <!-- Wordmark -->
+  <text x="62" y="22" font-family="Space Grotesk, Inter, sans-serif" font-size="17" font-weight="700" fill="#FFFFFF" letter-spacing="-0.5">Veridion</text>
+  <text x="62" y="22" font-family="Space Grotesk, Inter, sans-serif" font-size="17" font-weight="700" fill="#2BB9C8" letter-spacing="-0.5" dx="84">Systems</text>
+  <text x="62" y="38" font-family="Space Grotesk, Inter, sans-serif" font-size="10" font-weight="500" fill="#6B8594" letter-spacing="1.6">LTD  ·  AI  ·  AUTOMATION  ·  BUSINESS INTELLIGENCE</text>
+</svg>

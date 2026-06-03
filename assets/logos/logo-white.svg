@@ -1,0 +1,16 @@
+<svg width="220" height="40" viewBox="0 0 220 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!--
+    Veridion Systems Ltd — White Logo (for coloured / dark photo backgrounds)
+    Everything is white. Use when the teal version lacks contrast.
+  -->
+
+  <!-- Icon badge (white on semi-white container) -->
+  <rect width="40" height="40" rx="8" fill="rgba(255,255,255,0.15)"/>
+  <path d="M 5 11 H 13 L 20 29" stroke="#FFFFFF" stroke-width="4.2" stroke-linecap="square" stroke-linejoin="bevel" fill="none"/>
+  <path d="M 20 29 L 27 11 H 35" stroke="#FFFFFF" stroke-width="4.2" stroke-linecap="square" stroke-linejoin="bevel" fill="none"/>
+  <rect x="17.9" y="27.1" width="4.2" height="4.2" fill="rgba(255,255,255,0.7)"/>
+
+  <!-- Wordmark -->
+  <text x="50" y="18" font-family="Space Grotesk, Inter, sans-serif" font-size="14.5" font-weight="700" fill="#FFFFFF" letter-spacing="-0.4">Veridion Systems</text>
+  <text x="50" y="32" font-family="Space Grotesk, Inter, sans-serif" font-size="9" font-weight="500" fill="rgba(255,255,255,0.55)" letter-spacing="1.4">Ltd</text>
+</svg>
