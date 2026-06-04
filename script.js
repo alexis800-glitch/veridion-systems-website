@@ -92,11 +92,24 @@ if (form) {
 
     try {
       const formData = new FormData(form);
-      await fetch(form.action, {
-        method: form.method,
-        body: formData,
-        mode: 'no-cors'
+      const payload = {
+        fullName:           formData.get('name'),
+        companyName:        formData.get('company'),
+        email:              formData.get('email'),
+        phone:              formData.get('phone'),
+        industry:           formData.get('industry'),
+        projectDescription: formData.get('message'),
+        budgetRange:        formData.get('budget'),
+        timeline:           formData.get('timeline')
+      };
+
+      const res = await fetch(form.action, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
       });
+
+      if (!res.ok) throw new Error(`Server responded with ${res.status}`);
 
       showSuccessMessage(originalBtnHTML);
 

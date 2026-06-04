@@ -350,6 +350,7 @@ section#contact {
 @keyframes chip-float-a { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-9px)} }
 @keyframes chip-float-b { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-7px)} }
 @keyframes chip-float-c { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-11px)} }
+@keyframes slideUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
 
 .chip-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .chip-icon-teal { background: rgba(43,185,200,0.12); color: var(--teal); }
@@ -938,6 +939,30 @@ section#contact {
 }
 .form-group select { appearance: none; -webkit-appearance: none; cursor: pointer; padding-right: 36px; }
 .form-group select option { background: #0E2832; color: var(--text); }
+
+/* Success Message */
+.contact-success {
+  background: var(--bg-3); border: 1px solid var(--bdr);
+  border-radius: 14px; padding: 48px 36px; display: flex; flex-direction: column;
+  gap: 16px; align-items: center; justify-content: center; text-align: center;
+  animation: slideUp .5s ease-out;
+}
+.success-icon {
+  width: 64px; height: 64px; border-radius: 12px;
+  background: linear-gradient(135deg, rgba(24, 178, 106, 0.2), rgba(34, 211, 122, 0.1));
+  border: 1px solid rgba(24, 178, 106, 0.4);
+  display: flex; align-items: center; justify-content: center;
+  color: #18B26A;
+}
+.success-icon svg { width: 32px; height: 32px; }
+.contact-success h3 {
+  font-family: var(--fh); font-size: 1.3rem; font-weight: 600;
+  color: var(--text); margin: 0;
+}
+.contact-success p {
+  font-size: 0.95rem; color: var(--text-m); margin: 0;
+  max-width: 400px;
+}
 
 /* ================================================================
    FOOTER
