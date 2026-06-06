@@ -64,12 +64,83 @@ const revealObserver = new IntersectionObserver(entries => {
 
 document.querySelectorAll('.fade-in').forEach(el => revealObserver.observe(el));
 
-/* ── Floating AI Button ── */
-const floatBtn = document.getElementById('float-btn');
+/* ── Floating AI Chat Widget ── */
+const floatBtn   = document.getElementById('float-btn');
+const chatPanel  = document.getElementById('ai-chat-panel');
+const chatClose  = document.getElementById('ai-chat-close');
+const chatForm   = document.getElementById('ai-chat-form');
+const chatInput  = document.getElementById('ai-chat-input');
+const chatMsgs   = document.getElementById('ai-chat-messages');
+
 if (floatBtn) {
   window.addEventListener('scroll', () => {
     floatBtn.classList.toggle('visible', window.scrollY > 480);
   }, { passive: true });
+
+  floatBtn.addEventListener('click', () => {
+    const isOpen = chatPanel.classList.toggle('open');
+    floatBtn.setAttribute('aria-expanded', String(isOpen));
+    chatPanel.setAttribute('aria-hidden', String(!isOpen));
+    if (isOpen) chatInput.focus();
+  });
+}
+
+if (chatClose) {
+  chatClose.addEventListener('click', () => {
+    chatPanel.classList.remove('open');
+    floatBtn.setAttribute('aria-expanded', 'false');
+    chatPanel.setAttribute('aria-hidden', 'true');
+  });
+}
+
+function appendMsg(text, role) {
+  const div = document.createElement('div');
+  div.className = `ai-msg ai-msg--${role}`;
+  const p = document.createElement('p');
+  p.textContent = text;
+  div.appendChild(p);
+  chatMsgs.appendChild(div);
+  chatMsgs.scrollTop = chatMsgs.scrollHeight;
+  return div;
+}
+
+if (chatForm) {
+  chatForm.addEventListener('submit', async e => {
+    e.preventDefault();
+    const question = chatInput.value.trim();
+    if (!question) return;
+
+    appendMsg(question, 'user');
+    chatInput.value = '';
+    chatInput.disabled = true;
+    const sendBtn = chatForm.querySelector('.ai-chat-send');
+    if (sendBtn) sendBtn.disabled = true;
+
+    const typingEl = appendMsg('Thinking…', 'typing');
+
+    try {
+      const res = await fetch('https://superagent-60478300.base44.app/functions/veridionChat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: question })
+      });
+
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json();
+      const answer = data?.reply?.reply || data?.reply || 'Sorry, I couldn\'t get a response. Please try again.';
+      typingEl.remove();
+      appendMsg(answer, 'bot');
+
+    } catch (err) {
+      console.error('Veridion AI error:', err);
+      typingEl.remove();
+      appendMsg('Sorry, something went wrong. Please try again or contact us directly.', 'bot');
+    } finally {
+      chatInput.disabled = false;
+      if (sendBtn) sendBtn.disabled = false;
+      chatInput.focus();
+    }
+  });
 }
 
 /* ── Contact Form ── */
