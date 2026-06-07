@@ -1,3 +1,15 @@
+'use client';
+
+import { motion } from 'framer-motion';
+
+const ease = [0.25, 0.4, 0.25, 1] as const;
+
+const fadeUp = (delay = 0, duration = 0.65) => ({
+  initial: { opacity: 0, y: 22 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration, delay, ease },
+});
+
 export function Hero() {
   return (
     <section id="hero">
@@ -10,23 +22,23 @@ export function Hero() {
       <div className="container hero-layout">
         {/* Left: copy */}
         <div className="hero-copy">
-          <div className="hero-eyebrow">
+          <motion.div {...fadeUp(0)} className="hero-eyebrow">
             <span className="eyebrow-dot" />
             AI · Automation · Business Intelligence
-          </div>
+          </motion.div>
 
-          <h1>
+          <motion.h1 {...fadeUp(0.1, 0.7)}>
             AI, Automation &amp;{' '}
             <span className="headline-gradient">Business Intelligence</span>
-          </h1>
+          </motion.h1>
 
-          <p className="hero-sub">
+          <motion.p {...fadeUp(0.2)} className="hero-sub">
             We design booking platforms, operational dashboards, AI workflows,
             and custom business applications that help organisations automate
             work and make smarter decisions.
-          </p>
+          </motion.p>
 
-          <div className="hero-actions">
+          <motion.div {...fadeUp(0.3)} className="hero-actions">
             <a href="#contact" className="btn btn-primary btn-lg">
               <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                 <rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/>
@@ -40,9 +52,9 @@ export function Hero() {
                 <polyline points="9 18 15 12 9 6"/>
               </svg>
             </a>
-          </div>
+          </motion.div>
 
-          <div className="hero-credentials">
+          <motion.div {...fadeUp(0.42)} className="hero-credentials">
             <div className="cred">
               <div className="cred-icon" aria-hidden="true">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -79,11 +91,17 @@ export function Hero() {
                 <span className="cred-label">Automation-Focused Delivery</span>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Right: dashboard visual */}
-        <div className="hero-visual" aria-hidden="true">
+        <motion.div
+          className="hero-visual"
+          aria-hidden="true"
+          initial={{ opacity: 0, x: 36 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.18, ease }}
+        >
           <div className="hv-window">
             <div className="hv-chrome">
               <div className="hv-chrome-dots"><span /><span /><span /></div>
@@ -174,7 +192,7 @@ export function Hero() {
               <span className="chip-val small teal">Auto-sent to client ✓</span>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

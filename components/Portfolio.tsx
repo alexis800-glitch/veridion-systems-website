@@ -1,6 +1,19 @@
 'use client';
 
-import { useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { AnimateInView } from './AnimateInView';
+
+const ease = [0.25, 0.4, 0.25, 1] as const;
+
+const containerVariants = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 32 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease } },
+};
 
 interface PortfolioCardProps {
   href?: string;
@@ -16,6 +29,83 @@ interface PortfolioCardProps {
   tags: string[];
 }
 
+const portfolioItems: PortfolioCardProps[] = [
+  {
+    href: 'https://ekochristmasportal.com',
+    ariaLabel: 'Visit Eko Christmas Booking Portal (opens in new tab)',
+    url: 'ekochristmasportal.com',
+    imgSrc: '/assets/screenshots/christmas-dashboard.png',
+    imgAlt: 'Eko Christmas Booking Portal, operational screenshot',
+    placeholder: '📅',
+    placeholderLabel: 'Booking Portal',
+    badge: 'Hospitality',
+    title: 'Eko Christmas Booking Portal',
+    description: 'Seasonal hospitality booking system with real-time availability, payment integration, and automated guest confirmation workflows.',
+    tags: ['Node.js', 'React', 'PostgreSQL', 'Stripe'],
+  },
+  {
+    href: 'https://hebseventportal.com',
+    ariaLabel: 'Visit HEBS Event Management Platform (opens in new tab)',
+    url: 'hebseventportal.com',
+    imgSrc: '/assets/screenshots/hebs-event-management.png',
+    imgAlt: 'HEBS Event Management Platform, operational screenshot',
+    placeholder: '📋',
+    placeholderLabel: 'Event Management',
+    badge: 'Events',
+    title: 'HEBS Event Management Platform',
+    description: 'Comprehensive event operations platform with attendee management, ticketing, real-time capacity tracking, and integrated reporting for enterprise event teams.',
+    tags: ['Vue.js', 'Python', 'MongoDB', 'Real-time'],
+  },
+  {
+    href: 'https://tickets.ekohotels.com',
+    ariaLabel: 'Visit Eko Event Ticketing System (opens in new tab)',
+    url: 'tickets.ekohotels.com',
+    imgSrc: '/assets/screenshots/ticketing-dashboard.png',
+    imgAlt: 'Eko Event Ticketing System, operational screenshot',
+    placeholder: '🎟️',
+    placeholderLabel: 'Ticketing System',
+    badge: 'Events',
+    title: 'Eko Event Ticketing System',
+    description: 'Full-featured ticketing platform with dynamic pricing, QR code generation, mobile gate scanning, and real-time revenue analytics for event organizers.',
+    tags: ['Next.js', 'Firebase', 'QR Codes', 'Payment API'],
+  },
+  {
+    url: 'ai-email.veridion.app',
+    imgSrc: '/assets/screenshots/email-automation.png',
+    imgAlt: 'AI Email Automation Workflow, operational screenshot',
+    placeholder: '🤖',
+    placeholderLabel: 'AI Automation',
+    badge: 'Automation',
+    title: 'AI Email Automation Workflow',
+    description: 'Intelligent email processing with LLM-powered classification, sentiment analysis, automatic routing, and AI-generated response suggestions for support teams.',
+    tags: ['OpenAI API', 'Python', 'NLP', 'Workflow Engine'],
+  },
+  {
+    href: 'https://invoice.safariwings.net',
+    ariaLabel: 'Visit Safari Wings Travel Platform (opens in new tab)',
+    url: 'invoice.safariwings.net',
+    imgSrc: '/assets/screenshots/safariwings-homepage.png',
+    imgAlt: 'Safari Wings Travel Platform, screenshot',
+    placeholder: '✈️',
+    placeholderLabel: 'Travel Platform',
+    badge: 'Travel',
+    title: 'Safari Wings Travel Platform',
+    description: 'End-to-end travel operations platform combining booking management, customer relationship tools, itinerary builder, and a client-facing self-service portal.',
+    tags: ['React', 'Node.js', 'MongoDB', 'Google Maps API'],
+  },
+  {
+    url: 'hotel-dashboard.veridion.app',
+    imgSrc: '/assets/screenshots/hotel-dashboard.png',
+    imgAlt: 'Hotel Performance Dashboard, screenshot',
+    placeholder: '📊',
+    placeholderLabel: 'Performance Dashboard',
+    badge: 'Hospitality',
+    title: 'Hotel Performance Dashboard',
+    description: 'Executive business intelligence dashboard connected to Power BI, providing hospitality leadership with occupancy, revenue, and operational KPI visibility in real-time.',
+    tags: ['Power BI', 'DAX', 'Analytics', 'SQL Server'],
+  },
+];
+
 function PortfolioCard({
   href,
   ariaLabel,
@@ -29,7 +119,7 @@ function PortfolioCard({
   description,
   tags,
 }: PortfolioCardProps) {
-  const cardContent = (
+  const inner = (
     <>
       <div className="pc-screen">
         <div className="pc-chrome">
@@ -78,111 +168,43 @@ function PortfolioCard({
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="portfolio-card fade-in"
+        className="portfolio-card"
         aria-label={ariaLabel}
         style={{ cursor: 'pointer' }}
       >
-        {cardContent}
+        {inner}
       </a>
     );
   }
 
-  return <div className="portfolio-card fade-in">{cardContent}</div>;
+  return <div className="portfolio-card">{inner}</div>;
 }
 
 export function Portfolio() {
   return (
     <section id="portfolio">
       <div className="container">
-        <div className="section-header">
-          <div className="section-eyebrow">Portfolio</div>
-          <h2>Selected Work by <span className="text-teal">Veridion Systems</span></h2>
-          <p>Selected internal and client-facing systems designed by Veridion Systems Ltd. Each project below represents a real operational challenge and a practical system built to address it.</p>
-        </div>
+        <AnimateInView>
+          <div className="section-header">
+            <div className="section-eyebrow">Portfolio</div>
+            <h2>Selected Work by <span className="text-teal">Veridion Systems</span></h2>
+            <p>Selected internal and client-facing systems designed by Veridion Systems Ltd. Each project below represents a real operational challenge and a practical system built to address it.</p>
+          </div>
+        </AnimateInView>
 
-        <div className="portfolio-grid">
-
-          <PortfolioCard
-            href="https://ekochristmasportal.com"
-            ariaLabel="Visit Eko Christmas Booking Portal (opens in new tab)"
-            url="ekochristmasportal.com"
-            imgSrc="/assets/screenshots/christmas-dashboard.png"
-            imgAlt="Eko Christmas Booking Portal, operational screenshot"
-            placeholder="📅"
-            placeholderLabel="Booking Portal"
-            badge="Hospitality"
-            title="Eko Christmas Booking Portal"
-            description="Seasonal hospitality booking system with real-time availability, payment integration, and automated guest confirmation workflows."
-            tags={['Node.js', 'React', 'PostgreSQL', 'Stripe']}
-          />
-
-          <PortfolioCard
-            href="https://hebseventportal.com"
-            ariaLabel="Visit HEBS Event Management Platform (opens in new tab)"
-            url="hebseventportal.com"
-            imgSrc="/assets/screenshots/hebs-event-management.png"
-            imgAlt="HEBS Event Management Platform, operational screenshot"
-            placeholder="📋"
-            placeholderLabel="Event Management"
-            badge="Events"
-            title="HEBS Event Management Platform"
-            description="Comprehensive event operations platform with attendee management, ticketing, real-time capacity tracking, and integrated reporting for enterprise event teams."
-            tags={['Vue.js', 'Python', 'MongoDB', 'Real-time']}
-          />
-
-          <PortfolioCard
-            href="https://tickets.ekohotels.com"
-            ariaLabel="Visit Eko Event Ticketing System (opens in new tab)"
-            url="tickets.ekohotels.com"
-            imgSrc="/assets/screenshots/ticketing-dashboard.png"
-            imgAlt="Eko Event Ticketing System, operational screenshot"
-            placeholder="🎟️"
-            placeholderLabel="Ticketing System"
-            badge="Events"
-            title="Eko Event Ticketing System"
-            description="Full-featured ticketing platform with dynamic pricing, QR code generation, mobile gate scanning, and real-time revenue analytics for event organizers."
-            tags={['Next.js', 'Firebase', 'QR Codes', 'Payment API']}
-          />
-
-          <PortfolioCard
-            url="ai-email.veridion.app"
-            imgSrc="/assets/screenshots/email-automation.png"
-            imgAlt="AI Email Automation Workflow, operational screenshot"
-            placeholder="🤖"
-            placeholderLabel="AI Automation"
-            badge="Automation"
-            title="AI Email Automation Workflow"
-            description="Intelligent email processing with LLM-powered classification, sentiment analysis, automatic routing, and AI-generated response suggestions for support teams."
-            tags={['OpenAI API', 'Python', 'NLP', 'Workflow Engine']}
-          />
-
-          <PortfolioCard
-            href="https://invoice.safariwings.net"
-            ariaLabel="Visit Safari Wings Travel Platform (opens in new tab)"
-            url="invoice.safariwings.net"
-            imgSrc="/assets/screenshots/safariwings-homepage.png"
-            imgAlt="Safari Wings Travel Platform, screenshot"
-            placeholder="✈️"
-            placeholderLabel="Travel Platform"
-            badge="Travel"
-            title="Safari Wings Travel Platform"
-            description="End-to-end travel operations platform combining booking management, customer relationship tools, itinerary builder, and a client-facing self-service portal."
-            tags={['React', 'Node.js', 'MongoDB', 'Google Maps API']}
-          />
-
-          <PortfolioCard
-            url="hotel-dashboard.veridion.app"
-            imgSrc="/assets/screenshots/hotel-dashboard.png"
-            imgAlt="Hotel Performance Dashboard, screenshot"
-            placeholder="📊"
-            placeholderLabel="Performance Dashboard"
-            badge="Hospitality"
-            title="Hotel Performance Dashboard"
-            description="Executive business intelligence dashboard connected to Power BI, providing hospitality leadership with occupancy, revenue, and operational KPI visibility in real-time."
-            tags={['Power BI', 'DAX', 'Analytics', 'SQL Server']}
-          />
-
-        </div>
+        <motion.div
+          className="portfolio-grid"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-60px' }}
+        >
+          {portfolioItems.map((item) => (
+            <motion.div key={item.title} variants={cardVariants}>
+              <PortfolioCard {...item} />
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

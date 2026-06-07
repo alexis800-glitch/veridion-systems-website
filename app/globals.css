@@ -511,7 +511,6 @@ section#contact {
   opacity: 0; transition: opacity 0.32s;
 }
 .service-card:hover {
-  transform: translateY(-6px);
   background: rgba(43,185,200,0.04);
   border-color: rgba(43,185,200,0.2);
   box-shadow: 0 24px 64px rgba(0,0,0,0.38), 0 0 0 1px rgba(43,185,200,0.08);
