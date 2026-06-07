@@ -1,0 +1,16 @@
+<svg width="220" height="40" viewBox="0 0 220 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!--
+    Veridion Systems Ltd — Dark Logo (for white / light backgrounds)
+    Icon badge stays dark. Wordmark in dark text.
+  -->
+
+  <!-- Icon badge -->
+  <rect width="40" height="40" rx="8" fill="#071923"/>
+  <path d="M 5 11 H 13 L 20 29" stroke="#2BB9C8" stroke-width="4.2" stroke-linecap="square" stroke-linejoin="bevel" fill="none"/>
+  <path d="M 20 29 L 27 11 H 35" stroke="#2BB9C8" stroke-width="4.2" stroke-linecap="square" stroke-linejoin="bevel" fill="none"/>
+  <rect x="17.9" y="27.1" width="4.2" height="4.2" fill="#D6A93B"/>
+
+  <!-- Wordmark (dark text for light bg) -->
+  <text x="50" y="18" font-family="Space Grotesk, Inter, sans-serif" font-size="14.5" font-weight="700" fill="#071923" letter-spacing="-0.4">Veridion <tspan fill="#2BB9C8">Systems</tspan></text>
+  <text x="50" y="32" font-family="Space Grotesk, Inter, sans-serif" font-size="9" font-weight="500" fill="#6B8594" letter-spacing="1.4">Ltd</text>
+</svg>

@@ -1,0 +1,189 @@
+'use client';
+
+import { useEffect } from 'react';
+
+interface PortfolioCardProps {
+  href?: string;
+  ariaLabel?: string;
+  url: string;
+  imgSrc: string;
+  imgAlt: string;
+  placeholder: string;
+  placeholderLabel: string;
+  badge: string;
+  title: string;
+  description: string;
+  tags: string[];
+}
+
+function PortfolioCard({
+  href,
+  ariaLabel,
+  url,
+  imgSrc,
+  imgAlt,
+  placeholder,
+  placeholderLabel,
+  badge,
+  title,
+  description,
+  tags,
+}: PortfolioCardProps) {
+  const cardContent = (
+    <>
+      <div className="pc-screen">
+        <div className="pc-chrome">
+          <div className="pc-chrome-controls">
+            <div className="pc-dots"><span /><span /><span /></div>
+            <div className="pc-url">{url}</div>
+          </div>
+        </div>
+        <div className="pc-viewport">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={imgSrc}
+            alt={imgAlt}
+            className="pc-shot"
+            loading="lazy"
+            onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+          />
+          <div className="pc-img-placeholder" aria-hidden="true">
+            <div className="ph-icon">{placeholder}</div>
+            <span>{placeholderLabel}</span>
+          </div>
+        </div>
+      </div>
+      <div className="pc-info">
+        <div className="pc-badge">{badge}</div>
+        <h3>{title}</h3>
+        <p>{description}</p>
+        <div className="pc-tags">
+          {tags.map((tag) => (
+            <span key={tag} className="tag-tech">{tag}</span>
+          ))}
+        </div>
+        <a href="#case-studies" className="btn-case-study">
+          View Case Study
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+            <polyline points="9 18 15 12 9 6"/>
+          </svg>
+        </a>
+      </div>
+    </>
+  );
+
+  if (href) {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="portfolio-card fade-in"
+        aria-label={ariaLabel}
+        style={{ cursor: 'pointer' }}
+      >
+        {cardContent}
+      </a>
+    );
+  }
+
+  return <div className="portfolio-card fade-in">{cardContent}</div>;
+}
+
+export function Portfolio() {
+  return (
+    <section id="portfolio">
+      <div className="container">
+        <div className="section-header">
+          <div className="section-eyebrow">Portfolio</div>
+          <h2>Selected Work by <span className="text-teal">Veridion Systems</span></h2>
+          <p>Selected internal and client-facing systems designed by Veridion Systems Ltd. Each project below represents a real operational challenge and a practical system built to address it.</p>
+        </div>
+
+        <div className="portfolio-grid">
+
+          <PortfolioCard
+            href="https://ekochristmasportal.com"
+            ariaLabel="Visit Eko Christmas Booking Portal (opens in new tab)"
+            url="ekochristmasportal.com"
+            imgSrc="/assets/screenshots/christmas-dashboard.png"
+            imgAlt="Eko Christmas Booking Portal, operational screenshot"
+            placeholder="📅"
+            placeholderLabel="Booking Portal"
+            badge="Hospitality"
+            title="Eko Christmas Booking Portal"
+            description="Seasonal hospitality booking system with real-time availability, payment integration, and automated guest confirmation workflows."
+            tags={['Node.js', 'React', 'PostgreSQL', 'Stripe']}
+          />
+
+          <PortfolioCard
+            href="https://hebseventportal.com"
+            ariaLabel="Visit HEBS Event Management Platform (opens in new tab)"
+            url="hebseventportal.com"
+            imgSrc="/assets/screenshots/hebs-event-management.png"
+            imgAlt="HEBS Event Management Platform, operational screenshot"
+            placeholder="📋"
+            placeholderLabel="Event Management"
+            badge="Events"
+            title="HEBS Event Management Platform"
+            description="Comprehensive event operations platform with attendee management, ticketing, real-time capacity tracking, and integrated reporting for enterprise event teams."
+            tags={['Vue.js', 'Python', 'MongoDB', 'Real-time']}
+          />
+
+          <PortfolioCard
+            href="https://tickets.ekohotels.com"
+            ariaLabel="Visit Eko Event Ticketing System (opens in new tab)"
+            url="tickets.ekohotels.com"
+            imgSrc="/assets/screenshots/ticketing-dashboard.png"
+            imgAlt="Eko Event Ticketing System, operational screenshot"
+            placeholder="🎟️"
+            placeholderLabel="Ticketing System"
+            badge="Events"
+            title="Eko Event Ticketing System"
+            description="Full-featured ticketing platform with dynamic pricing, QR code generation, mobile gate scanning, and real-time revenue analytics for event organizers."
+            tags={['Next.js', 'Firebase', 'QR Codes', 'Payment API']}
+          />
+
+          <PortfolioCard
+            url="ai-email.veridion.app"
+            imgSrc="/assets/screenshots/email-automation.png"
+            imgAlt="AI Email Automation Workflow, operational screenshot"
+            placeholder="🤖"
+            placeholderLabel="AI Automation"
+            badge="Automation"
+            title="AI Email Automation Workflow"
+            description="Intelligent email processing with LLM-powered classification, sentiment analysis, automatic routing, and AI-generated response suggestions for support teams."
+            tags={['OpenAI API', 'Python', 'NLP', 'Workflow Engine']}
+          />
+
+          <PortfolioCard
+            href="https://invoice.safariwings.net"
+            ariaLabel="Visit Safari Wings Travel Platform (opens in new tab)"
+            url="invoice.safariwings.net"
+            imgSrc="/assets/screenshots/safariwings-homepage.png"
+            imgAlt="Safari Wings Travel Platform, screenshot"
+            placeholder="✈️"
+            placeholderLabel="Travel Platform"
+            badge="Travel"
+            title="Safari Wings Travel Platform"
+            description="End-to-end travel operations platform combining booking management, customer relationship tools, itinerary builder, and a client-facing self-service portal."
+            tags={['React', 'Node.js', 'MongoDB', 'Google Maps API']}
+          />
+
+          <PortfolioCard
+            url="hotel-dashboard.veridion.app"
+            imgSrc="/assets/screenshots/hotel-dashboard.png"
+            imgAlt="Hotel Performance Dashboard, screenshot"
+            placeholder="📊"
+            placeholderLabel="Performance Dashboard"
+            badge="Hospitality"
+            title="Hotel Performance Dashboard"
+            description="Executive business intelligence dashboard connected to Power BI, providing hospitality leadership with occupancy, revenue, and operational KPI visibility in real-time."
+            tags={['Power BI', 'DAX', 'Analytics', 'SQL Server']}
+          />
+
+        </div>
+      </div>
+    </section>
+  );
+}
