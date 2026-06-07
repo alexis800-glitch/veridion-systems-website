@@ -1,6 +1,9 @@
 export function Hero() {
   return (
     <section id="hero">
+      <div className="hero-blob hero-blob-1" aria-hidden="true" />
+      <div className="hero-blob hero-blob-2" aria-hidden="true" />
+      <div className="hero-blob hero-blob-3" aria-hidden="true" />
       <div className="hero-bg-dots" aria-hidden="true" />
       <div className="hero-bg-gradient" aria-hidden="true" />
 
@@ -13,8 +16,8 @@ export function Hero() {
           </div>
 
           <h1>
-            AI, Automation &amp; Business Intelligence
-            <span className="text-teal"> Solutions for Modern Businesses</span>
+            AI, Automation &amp;{' '}
+            <span className="headline-gradient">Business Intelligence</span>
           </h1>
 
           <p className="hero-sub">
