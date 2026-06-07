@@ -2,8 +2,9 @@
 
 import { motion } from 'framer-motion';
 import { AnimateInView } from './AnimateInView';
+import { useMounted } from '@/hooks/useMounted';
 
-const ease = [0.25, 0.4, 0.25, 1] as const;
+const ease: [number, number, number, number] = [0.25, 0.4, 0.25, 1];
 
 const containerVariants = {
   hidden: {},
@@ -16,6 +17,8 @@ const cardVariants = {
 };
 
 export function Services() {
+  const mounted = useMounted();
+
   return (
     <section id="services">
       <div className="container">
@@ -31,8 +34,8 @@ export function Services() {
           className="services-grid"
           variants={containerVariants}
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-60px' }}
+          whileInView={mounted ? 'visible' : undefined}
+          viewport={{ once: true, margin: '0px' }}
         >
 
           <motion.div

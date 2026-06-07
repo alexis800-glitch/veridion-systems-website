@@ -1,16 +1,19 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { useMounted } from '@/hooks/useMounted';
 
-const ease = [0.25, 0.4, 0.25, 1] as const;
-
-const fadeUp = (delay = 0, duration = 0.65) => ({
-  initial: { opacity: 0, y: 22 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration, delay, ease },
-});
+const ease: [number, number, number, number] = [0.25, 0.4, 0.25, 1];
 
 export function Hero() {
+  const mounted = useMounted();
+
+  const fadeUp = (delay = 0, duration = 0.65) => ({
+    initial: { opacity: 0, y: 22 },
+    animate: mounted ? { opacity: 1, y: 0 } : { opacity: 0, y: 22 },
+    transition: { duration, delay, ease },
+  });
+
   return (
     <section id="hero">
       <div className="hero-blob hero-blob-1" aria-hidden="true" />
@@ -99,7 +102,7 @@ export function Hero() {
           className="hero-visual"
           aria-hidden="true"
           initial={{ opacity: 0, x: 36 }}
-          animate={{ opacity: 1, x: 0 }}
+          animate={mounted ? { opacity: 1, x: 0 } : { opacity: 0, x: 36 }}
           transition={{ duration: 0.8, delay: 0.18, ease }}
         >
           <div className="hv-window">
