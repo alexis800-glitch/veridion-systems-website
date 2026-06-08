@@ -1006,7 +1006,7 @@ section#contact {
   width: 35px; height: 35px; border-radius: 9px;
   background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.07);
   display: flex; align-items: center; justify-content: center; color: var(--text-m);
-  transition: all .24s;
+  transition: all 0.2s ease;
 }
 .social-btn:hover { background: rgba(43,185,200,.1); border-color: rgba(43,185,200,.26); color: var(--teal); }
 .social-wa:hover  { background: rgba(37,211,102,.1); border-color: rgba(37,211,102,.3); color: #25d366; }

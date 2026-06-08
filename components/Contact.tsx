@@ -90,7 +90,7 @@ export function Contact() {
                 </div>
                 <div>
                   <p className="cd-label">LinkedIn</p>
-                  <a href="#" target="_blank" rel="noopener noreferrer">Veridion Systems Ltd</a>
+                  <a href="https://www.linkedin.com/company/126484159" target="_blank" rel="noopener noreferrer">Veridion Systems Ltd</a>
                 </div>
               </div>
             </div>
