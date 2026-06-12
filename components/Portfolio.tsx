@@ -105,6 +105,19 @@ const portfolioItems: PortfolioCardProps[] = [
     description: 'Executive business intelligence dashboard connected to Power BI, providing hospitality leadership with occupancy, revenue, and operational KPI visibility in real-time.',
     tags: ['Power BI', 'DAX', 'Analytics', 'SQL Server'],
   },
+  {
+    href: 'https://hebs-lagos-2026.vercel.app',
+    ariaLabel: 'Visit HEBS Lagos 2026 event website (opens in new tab)',
+    url: 'hebs-lagos-2026.vercel.app',
+    imgSrc: '/assets/screenshots/Hebs-Website.png',
+    imgAlt: 'HEBS Lagos 2026 event website, screenshot',
+    placeholder: '🏆',
+    placeholderLabel: 'Event Website',
+    badge: 'Event Website',
+    title: 'HEBS Lagos 2026',
+    description: 'Premium public event website for Lagos Nigeria\'s premier beauty competition. Features live countdown, ticketing, competition categories and partnership showcase. Built for a $35,000 prize event.',
+    tags: ['Next.js', 'Vercel', 'Tailwind CSS', 'Framer Motion'],
+  },
 ];
 
 function PortfolioCard({
